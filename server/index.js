@@ -84,7 +84,9 @@ app.post('/login',(req,res)=>{
   //console.log(req.body.user);
   User.findOne({username: req.body.user.username, password:req.body.user.password}).populate('orders').then(result=>{
       if(result){
+          console.log(result)
           req.session.user = result;
+          console.log("req",req.session.user)
           res.send({status:true, user:result});
       } else{
           res.status(404).send({status:false});
@@ -119,11 +121,12 @@ app.post('/signup',(req,res)=>{
 
 app.get('/user',(req,res)=>{
 if(req.session.user){
-  User.findOne({username: req.session.user.username}).populate('orders').then(result=>{
+    User.findOne({username: req.session.user.username}).populate('orders').then(result=>{
           req.session.user = result;
           res.send({status:true, user:result});
   })
 } else {
+  console.log("getuser", req.session)
   res.send({status:false});
 }
 });

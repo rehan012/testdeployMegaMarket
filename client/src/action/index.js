@@ -136,6 +136,7 @@ export const changeQuantityAC = (item) => {  //AC = Action Creator
 export const changeCart = (dispatch, item) => {
 
     axios.post("https://servermegamarket.onrender.com/cart", { item: item }).then(function (response) {
+        console.log("response.data : ", response.data)
         dispatch({ type: CHANGED_ITEM_IN_CART, payload: response.data })
     }).catch(function (error) {
         console.log(error);

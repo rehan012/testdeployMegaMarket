@@ -159,6 +159,7 @@ app.post('/cart', (req, res) => {
   }
   Cart.findOne({ userId: userId }).then(result => {
     if (result) {
+      console.log("if(result) : ", result)
       const itemIndex = result.items.findIndex(it => it._id == item._id);
       if (itemIndex >= 0) {
         result.items.splice(itemIndex, 1, item);
@@ -173,6 +174,7 @@ app.post('/cart', (req, res) => {
       cart.userId = userId;
       cart.items = [item];
       cart.save().then(cart => {
+        console.log("cart.save : ",cart)
         res.send(cart);
       })
     }

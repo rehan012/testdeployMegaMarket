@@ -14,7 +14,7 @@ export const INIT_USER = 'INIT_USER';
 
 export const loginAC = (user,navigate)=>{
   return function(dispatch){
-    axios.post('https://servermegamarket.onrender.com//login',{user}).then(function (response) {
+    axios.post('https://servermegamarket.onrender.com/login',{user}).then(function (response) {
         if(response.data.status){
           dispatch({type:INIT_USER, payload: response.data.user})
           dispatch(initializeCartAC(response.data.user._id));
@@ -31,7 +31,7 @@ export const loginAC = (user,navigate)=>{
 
 export const checkAuthAC = (navigate)=>{
   return function(dispatch){
-    axios.get('https://servermegamarket.onrender.com//user').then(function (response) {
+    axios.get('https://servermegamarket.onrender.com/user').then(function (response) {
       //console.log('auth',response.data);
         if(response.data.status){
           dispatch({type:INIT_USER, payload: response.data.user})
@@ -51,7 +51,7 @@ export const checkAuthAC = (navigate)=>{
 
 export const signupAC = (user,navigate)=>{
   return function(dispatch){
-    axios.post('https://servermegamarket.onrender.com//signup',{user}).then(function (response) {
+    axios.post('https://servermegamarket.onrender.com/signup',{user}).then(function (response) {
       if(response.data.status){
         dispatch({type:INIT_USER, payload: response.data.user})
         dispatch(initializeCartAC(response.data.user._id));
@@ -70,7 +70,7 @@ export const signupAC = (user,navigate)=>{
 
 export const logoutAC = (navigate)=>{
   return function(dispatch){
-    axios.get('https://servermegamarket.onrender.com//logout').then(function (response) {
+    axios.get('https://servermegamarket.onrender.com/logout').then(function (response) {
      //console.log('logoutAC');   
     if(response.data.status){
           dispatch({type:INIT_USER, payload: {}})
@@ -86,7 +86,7 @@ export const logoutAC = (navigate)=>{
 
 export const initializeProductsAC = () => {  //AC = Action Creator
     return function (dispatch) {
-        axios.get("https://servermegamarket.onrender.com//product").then(function (response) {
+        axios.get("https://servermegamarket.onrender.com/product").then(function (response) {
             dispatch({ type: INIT_PRODUCTS, payload: response.data })
         }).catch(function (error) {
             console.log(error);
@@ -97,7 +97,7 @@ export const initializeProductsAC = () => {  //AC = Action Creator
 
 export const initializeCartAC = (userId) => {
     return function (dispatch) {
-        axios.get('https://servermegamarket.onrender.com//cart').then(function (response) {
+        axios.get('https://servermegamarket.onrender.com/cart').then(function (response) {
             //console.log(response.data);
             dispatch({ type: INIT_CART, payload: { items: response.data.items, userId: userId } })
         })
@@ -135,7 +135,7 @@ export const changeQuantityAC = (item) => {  //AC = Action Creator
 
 export const changeCart = (dispatch, item) => {
 
-    axios.post("https://servermegamarket.onrender.com//cart", { item: item }).then(function (response) {
+    axios.post("https://servermegamarket.onrender.com/cart", { item: item }).then(function (response) {
         dispatch({ type: CHANGED_ITEM_IN_CART, payload: response.data })
     }).catch(function (error) {
         console.log(error);
@@ -151,7 +151,7 @@ export const changeOrderWithCart = (cartItems) => {
 
 export const addAddressAC = (address) => {  //AC = Action Creator
     return function (dispatch) {
-        axios.post('https://servermegamarket.onrender.com//updateUserAddress', { address: address }).then(function (response) {
+        axios.post('https://servermegamarket.onrender.com/updateUserAddress', { address: address }).then(function (response) {
             //console.log(response);
             dispatch({ type: ADD_ADDRESS, payload: response.data })
         })
@@ -169,7 +169,7 @@ export const setShipAddressAC = (address) => {  //AC = Action Creator
 
 export const placeOrderAC = (order,navigate) => {  //AC = Action Creator
     return function (dispatch) {
-        axios.post('https://servermegamarket.onrender.com//order', { order: order }).then(function (response) {
+        axios.post('https://servermegamarket.onrender.com/order', { order: order }).then(function (response) {
             //console.log(response);
             dispatch({ type: PLACE_ORDER, payload: response.data })
             navigate('/ordersuccess/'+response.data._id);
@@ -182,7 +182,7 @@ export const placeOrderAC = (order,navigate) => {  //AC = Action Creator
 
 export const emptyCartAC = () => {  //AC = Action Creator
     return function (dispatch) {
-        axios.post('https://servermegamarket.onrender.com//emptyCart').then(function (response) {
+        axios.post('https://servermegamarket.onrender.com/emptyCart').then(function (response) {
             //console.log(response);
             dispatch({ type: CHANGED_ITEM_IN_CART, payload: response.data })
         })
@@ -194,7 +194,7 @@ export const emptyCartAC = () => {  //AC = Action Creator
 }
 export const removeItemAC = (item) => {  //AC = Action Creator
     return function (dispatch) {
-        axios.post('https://servermegamarket.onrender.com//removeItem', { item: item }).then(function (response) {
+        axios.post('https://servermegamarket.onrender.com/removeItem', { item: item }).then(function (response) {
             //console.log(response);
             dispatch({ type: CHANGED_ITEM_IN_CART, payload: response.data })
         })

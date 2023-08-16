@@ -2,12 +2,12 @@ const ProductDetails = ({ product, addToCart }) => (
     <div class="container mb-5 mt-5">
         <div class="row d-flex flex-row">
             <div class="col-md-5 product-image">
-                <img class="img-fluid" src={`../../public/Images/${product.image}.jpg`} alt="" />
+                <img class="img-fluid" src={`Images/${product.image}.jpg`} alt="" />
             </div>
             <div class="col-md-2 product-small d-flex flex-md-column justify-content-start order-md-first">
-                <img class="img-fluid" src={`../../public/Images/${product.images[0]}.jpg`} alt="" />
-                <img class="img-fluid" src={`../../public/Images/${product.images[1]}.jpg`} alt="" />
-                <img class="img-fluid" src={`../../public/Images/${product.images[2]}.jpg`} alt="" />
+                <img class="img-fluid" src={`Images/${product.images[0]}.jpg`} alt="" />
+                <img class="img-fluid" src={`Images/${product.images[1]}.jpg`} alt="" />
+                <img class="img-fluid" src={`Images/${product.images[2]}.jpg`} alt="" />
             </div>
 
             <div class="col-md-5">

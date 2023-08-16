@@ -97,7 +97,7 @@ export const initializeProductsAC = () => {  //AC = Action Creator
 
 export const initializeCartAC = (userId) => {
     return function (dispatch) {
-        axios.get('https://servermegamarket.onrender.com/cart').then(function (response) {
+        axios.get("https://servermegamarket.onrender.com/cart").then(function (response) {
             //console.log(response.data);
             dispatch({ type: INIT_CART, payload: { items: response.data.items, userId: userId } })
         })

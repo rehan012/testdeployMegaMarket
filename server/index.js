@@ -141,7 +141,8 @@ app.get('/product', (req, res) => {
 })
 
 app.get('/cart', (req, res) => {
-  let userId = req.session.user._id;
+  // let userId = req.session.user._id;
+  let userId = "64db7d182c52632013fe54f7"
   console.log("userId", userId)
   console.log("req.session",req.session)
   console.log("req.session._id",req.session.user._id)
@@ -160,7 +161,10 @@ app.get('/cart', (req, res) => {
 app.post('/cart', (req, res) => {
 
    // This will be solved by Sessions
-  const userId = req.session.user._id;
+  // const userId = req.session.user._id;
+  let userId = "64db7d182c52632013fe54f7";
+
+  
   const item = req.body.item;
   if (!item.quantity) {
     item.quantity = 1;

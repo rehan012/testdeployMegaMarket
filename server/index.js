@@ -142,6 +142,11 @@ app.get('/product', (req, res) => {
 
 app.get('/cart', (req, res) => {
   let userId = req.session.user._id;
+  console.log("userId", userId)
+  console.log("req.session",req.session)
+  console.log("req.session._id",req.session.user._id)
+
+
   Cart.findOne({ userId: userId }).then((result) => {
     if (result) {
       res.send(result)

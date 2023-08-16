@@ -78,50 +78,7 @@ const User = new mongoose.model('User', userSchema);
 const Order = new mongoose.model('Order', orderSchema);
 
 
-// app.get('/createProduct', (req, res) => {
-//   let product = new Product({
 
-//     name: 'Nikon Xl54',
-//     price: 1200.75,
-//     category: 'Camera',
-//     rating: 3,
-//     color: 'black',
-//     size: '',
-//     details: {
-//       product: "",
-//       warranty: "",
-//       merchant: ""
-//     },
-//     image: 'product-4-square',
-//     images: ['product-4', 'product-4-2', 'product-4-3']
-
-//   })
-//   product.save().then((success) => {
-//     res.send(success)
-//   }).catch(err => {
-//     res.error(err)
-//   })
-
-// })
-
-
-
-// app.get('/createUser', (req, res) => {
-
-//   let user = new User({
-//     name: 'John',
-//     email: 'john@example.com',
-//     addresses: [],
-//     orders: []
-//   })
-
-//   user.save().then((success) => {
-//     res.send(success)
-//   }).catch(err => {
-//     res.error(err)
-//   })
-
-// })
 
 app.post('/login',(req,res)=>{
   //console.log(req.body.user);
@@ -287,6 +244,52 @@ app.post('/order', (req, res) => {
   })
 
 })
+
+
+// app.get('/createProduct', (req, res) => {
+//   let product = new Product({
+
+//     name: 'Nikon Xl54',
+//     price: 1200.75,
+//     category: 'Camera',
+//     rating: 3,
+//     color: 'black',
+//     size: '',
+//     details: {
+//       product: "",
+//       warranty: "",
+//       merchant: ""
+//     },
+//     image: 'product-4-square',
+//     images: ['product-4', 'product-4-2', 'product-4-3']
+
+//   })
+//   product.save().then((success) => {
+//     res.send(success)
+//   }).catch(err => {
+//     res.error(err)
+//   })
+
+// })
+
+
+
+// app.get('/createUser', (req, res) => {
+
+//   let user = new User({
+//     name: 'John',
+//     email: 'john@example.com',
+//     addresses: [],
+//     orders: []
+//   })
+
+//   user.save().then((success) => {
+//     res.send(success)
+//   }).catch(err => {
+//     res.error(err)
+//   })
+
+// })
 
 
 app.listen(PORT, () => {

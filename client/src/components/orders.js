@@ -11,7 +11,7 @@ const Orders = ({ items, order }) => {
               <div className="d-flex flex-row">
                 <img
                   className="col-2 img-fluid"
-                  src={`images/${item.image}.jpg`}
+                  src={`../../public/Images/${item.image}.jpg`}
                   alt=""
                 />
                 <div className="col-4 p-2">

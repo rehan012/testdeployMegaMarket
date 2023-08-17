@@ -11,7 +11,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const INIT_PRODUCTS = 'INIT_PRODUCTS';
 export const INIT_CART = 'INIT_CART';
 export const INIT_USER = 'INIT_USER';
-export const INIT_USER_ORDERS = 'INIT_USER_ORDERS';
+
 
 
 
@@ -20,7 +20,7 @@ export const initializeUserOrdersAC = () => {
         axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
             if (response.data.status) {
                 //console.log(response.data);
-                dispatch({ type: INIT_USER_ORDERS, payload: response.data.res })
+                dispatch({ type: INIT_USER, payload: response.data.res })
             }
         })
             .catch(function (error) {

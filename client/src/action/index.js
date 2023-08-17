@@ -20,7 +20,7 @@ export const initializeUserOrdersAC = () => {
         axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
             if (response.data.status) {
                 //console.log(response.data);
-                dispatch({ type: INIT_USER_ORDERS, payload: response.data.result })
+                dispatch({ type: INIT_USER_ORDERS, payload: response.data.res })
             }
         })
             .catch(function (error) {

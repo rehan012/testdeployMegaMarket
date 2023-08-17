@@ -1,4 +1,4 @@
-import { ADD_ADDRESS, CHANGE_ORDER_CART, CHANGED_ITEM_IN_CART, INIT_CART, INIT_USER, INIT_PRODUCTS, PLACE_ORDER, SET_SHIP_ADDRESS } from "../action";
+import { ADD_ADDRESS, CHANGE_ORDER_CART, CHANGED_ITEM_IN_CART, INIT_CART, INIT_USER,INIT_USER_ORDERS, INIT_PRODUCTS, PLACE_ORDER, SET_SHIP_ADDRESS } from "../action";
 
 
 
@@ -80,7 +80,7 @@ const userReducer = (state = initialStateUser, action) => {
 
   switch (action.type) {
 
-    case INIT_USER_ORDER:
+    case INIT_USER_ORDERS:
       return action.payload;
 
     case INIT_USER:

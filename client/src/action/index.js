@@ -11,6 +11,22 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const INIT_PRODUCTS = 'INIT_PRODUCTS';
 export const INIT_CART = 'INIT_CART';
 export const INIT_USER = 'INIT_USER';
+export const INIT_USER_ORDERS = 'INIT_USER_ORDERS';
+
+
+
+export const initializeUserOrdersAC = () => {
+    return function (dispatch) {
+        axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
+            //console.log(response.data);
+            dispatch({ type: INIT_USER_ORDERS, payload: response.data  })
+        })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+}
+
 
 export const loginAC = (user,navigate)=>{
   return function(dispatch){

@@ -54,6 +54,10 @@ const cartReducer = (state = initailStateCart, action) => {
 
 const orderReducer = (state = initailStateOrder, action) => {
   switch (action.type) {
+
+    case INIT_USER_ORDER:
+      return action.payload;
+
     case CHANGE_ORDER_CART:
       const items = action.payload;
       const total_items = items.reduce(

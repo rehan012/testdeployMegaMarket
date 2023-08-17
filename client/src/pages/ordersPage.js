@@ -12,7 +12,9 @@ const OrdersPage = () => {
   const sorted = [...user.orders].sort((a,b)=>(new Date(b.createdAt)-new Date(a.createdAt)))
 
 
-
+  useEffect(() => {
+    dispatch(initializeUserOrdersAC()); // Fetch user orders when the component mounts
+  }, [dispatch]);
 
   
  

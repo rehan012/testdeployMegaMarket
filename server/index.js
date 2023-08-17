@@ -84,7 +84,7 @@ const Order = new mongoose.model('Order', orderSchema);
 app.get('/userorders', (req, res) => {
   if (req.session.user) {
     User.findOne({ username: req.session.user.username }).populate('orders').then(result => {
-      res.send(result);
+      res.send({ status: true, result : result });
     }).catch((err) => console.log("userorders error", err))
 
 

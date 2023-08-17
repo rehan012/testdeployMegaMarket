@@ -2,7 +2,7 @@ import Nav from '../components/navbar';
 import Footer from '../components/footer';
 import Orders from '../components/orders';
 import { useSelector} from 'react-redux';
-import { initializeUserOrdersAC } from '../action';
+// import { initializeUserOrdersAC } from '../action';
 
 
 
@@ -13,10 +13,10 @@ const OrdersPage = () => {
   const sorted = [...user.orders].sort((a,b)=>(new Date(b.createdAt)-new Date(a.createdAt)))
 
 
-  useEffect(() => {
-    if(!user){
-    dispatch(initializeUserOrdersAC());} // Fetch user orders when the component mounts
-  }, [user]);
+  // useEffect(() => {
+  //   if(!user){
+  //   dispatch(initializeUserOrdersAC());} // Fetch user orders when the component mounts
+  // }, [user]);
 
   
  

@@ -28,8 +28,8 @@ const LoginSignup = ({login,signup})=>{
         <div>
           <a href="/" class="logo">
             <h1 class="text-center">MegaMarket</h1>
-            <p>For Direct Login without Signup</p>
-            <p class="text-center">For direct Login without Signup Use username as : Demo@abc.com</p>
+            <h6 class="text-center">For Direct Login without Signup</h6>
+            <p class="text-center">Use username as : Demo@abc.com</p>
             <p class="text-center">password as : 123456</p>
           </a>        
         </div>

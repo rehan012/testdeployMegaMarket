@@ -20,7 +20,8 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: true },
+  SameSite: 'none'
 }));
 
 
@@ -149,6 +150,7 @@ app.get('/product', (req, res) => {
 
 app.get('/cart', (req, res) => {
   // let userId = req.session.user._id;
+  console.log(req.session.user._id)
   let userId = "64db7d182c52632013fe54f7"
     // console.log("userId", userId)
   // console.log("req.session",req.session)
@@ -169,6 +171,7 @@ app.post('/cart', (req, res) => {
 
    // This will be solved by Sessions
   // const userId = req.session.user._id;
+  console.log(req.session.user._id)
   let userId = "64db7d182c52632013fe54f7";
 
   

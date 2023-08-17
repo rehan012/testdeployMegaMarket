@@ -28,7 +28,8 @@ const LoginSignup = ({login,signup})=>{
         <div>
           <a href="/" class="logo">
             <h1 class="text-center">MegaMarket</h1>
-            <p class="text-center">Use username as : Demo@abc.com</p>
+            <p>For Direct Login without Signup</p>
+            <p class="text-center">For direct Login without Signup Use username as : Demo@abc.com</p>
             <p class="text-center">password as : 123456</p>
           </a>        
         </div>
@@ -57,10 +58,10 @@ const LoginSignup = ({login,signup})=>{
           
                     <input type="submit" class="form-control btn-success" value="Login"/>
                 </form>
-                {/* <span class="link" onClick={()=>setShowLogin(false)}>Don't have an account? Create One</span> */}
+                <span class="link" onClick={()=>setShowLogin(false)}>Don't have an account? Create One</span>
             </div>:null}
 
-            {/* {!showLogin ? <div class="login-box m-auto mt-5 col-4">
+            {!showLogin ? <div class="login-box m-auto mt-5 col-4">
               <h3 class="text-center">Sign Up</h3>
               <form class="needs-validation" novalidate="" action="" onSubmit={e=>{e.preventDefault();validateSignup(user)}}>
                 <div>
@@ -89,7 +90,7 @@ const LoginSignup = ({login,signup})=>{
               </form>
                 <span class="link" onClick={()=>setShowLogin(true)}> Have an account? Login Here</span>
 
-            </div>:null} */}
+            </div>:null}
 
         </div>
    

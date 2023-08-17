@@ -10,7 +10,7 @@ const session = require('express-session')
 
 app.use(cors({
   origin: 'https://megamarketlive.vercel.app',
-  methods: ['GET','POST'],
+  methods: ['GET', 'POST'],
   credentials: true
 }))
 
@@ -20,8 +20,10 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
-  SameSite: 'none'
+  cookie: {
+    secure: true,
+    sameSite: 'none'
+  }
 }));
 
 
@@ -81,41 +83,41 @@ const Order = new mongoose.model('Order', orderSchema);
 
 
 
-app.post('/login',(req,res)=>{
+app.post('/login', (req, res) => {
   //console.log(req.body.user);
-  User.findOne({username: req.body.user.username, password:req.body.user.password}).populate('orders').then(result=>{
-      if(result){
-          console.log(result)
-          req.session.user = result;
-          console.log("req",req.session.user)
-          res.send({status:true, user:result});
-      } else{
-          res.status(404).send({status:false});
-      }
-      
+  User.findOne({ username: req.body.user.username, password: req.body.user.password }).populate('orders').then(result => {
+    if (result) {
+      console.log(result)
+      req.session.user = result;
+      console.log("req", req.session.user)
+      res.send({ status: true, user: result });
+    } else {
+      res.status(404).send({ status: false });
+    }
+
   })
 })
 
-app.get('/logout',(req,res)=>{
+app.get('/logout', (req, res) => {
 
- req.session.user = null;
- res.send({status: true})
+  req.session.user = null;
+  res.send({ status: true })
 })
 
-app.post('/signup',(req,res)=>{
+app.post('/signup', (req, res) => {
 
 
-  let user = new User({...req.body.user, email: req.body.user.username, orders:[]})
- 
-  User.findOne({username:req.body.user.username}).then(result=>{
-      if(result){
-          res.status(404).send({status:false});
-      } else {
-          user.save().then(usr=>{
-              req.session.user = usr;
-              res.send({status:true, user:usr});
-          })
-      }
+  let user = new User({ ...req.body.user, email: req.body.user.username, orders: [] })
+
+  User.findOne({ username: req.body.user.username }).then(result => {
+    if (result) {
+      res.status(404).send({ status: false });
+    } else {
+      user.save().then(usr => {
+        req.session.user = usr;
+        res.send({ status: true, user: usr });
+      })
+    }
   });
 
 
@@ -133,13 +135,13 @@ app.post('/signup',(req,res)=>{
 // }
 // });
 // you will need to call this for order updates. Not the best solution. you can make and Order GET API also.
-app.get('/user',(req,res)=>{
-    User.findOne({}).populate('orders').then(result=>{
+app.get('/user', (req, res) => {
+  User.findOne({}).populate('orders').then(result => {
     // req.session.user = result;
-    res.send({status:true, user:result});
-    })
-  
-  });
+    res.send({ status: true, user: result });
+  })
+
+});
 
 
 app.get('/product', (req, res) => {
@@ -152,7 +154,7 @@ app.get('/cart', (req, res) => {
   // let userId = req.session.user._id;
   console.log(req.session.user._id)
   let userId = "64db7d182c52632013fe54f7"
-    // console.log("userId", userId)
+  // console.log("userId", userId)
   // console.log("req.session",req.session)
   // console.log("req.session._id",req.session.user._id)
 
@@ -169,12 +171,12 @@ app.get('/cart', (req, res) => {
 
 app.post('/cart', (req, res) => {
 
-   // This will be solved by Sessions
+  // This will be solved by Sessions
   // const userId = req.session.user._id;
   console.log(req.session.user._id)
   let userId = "64db7d182c52632013fe54f7";
 
-  
+
   const item = req.body.item;
   if (!item.quantity) {
     item.quantity = 1;
@@ -196,7 +198,7 @@ app.post('/cart', (req, res) => {
       cart.userId = userId;
       cart.items = [item];
       cart.save().then(cart => {
-        console.log("cart.save : ",cart)
+        console.log("cart.save : ", cart)
         res.send(cart);
       })
     }
@@ -255,7 +257,7 @@ app.post('/updateUserAddress', (req, res) => {
 
 app.post('/order', (req, res) => {
   const userId = "64db7d182c52632013fe54f7"
-  
+
   const order = req.body.order;
 
   let newOrder = new Order(order);

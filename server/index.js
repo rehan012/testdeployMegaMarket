@@ -82,17 +82,18 @@ const Order = new mongoose.model('Order', orderSchema);
 
 
 app.get('/userorders', (req, res) => {
-  if (req.session.user) {
-    User.findOne({ username: req.session.user.username }).populate('orders').then(result => {
+  // if (req.session.user) {
+   let userId = "64db7d182c52632013fe54f7";
+    User.findOne({ _id: userId }).populate('orders').then(result => {
       req.session.user = result;
       res.send({ status: true, res : result });
     }).catch((err) => console.log("userorders error", err))
 
 
-  } else {
-    console.log("getuser", req.session)
-    res.send({ status: false });
-  }
+  // } else {
+  //   console.log("getuser", req.session)
+  //   res.send({ status: false });
+  // }
 });
 
 

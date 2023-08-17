@@ -18,8 +18,10 @@ export const INIT_USER_ORDERS = 'INIT_USER_ORDERS';
 export const initializeUserOrdersAC = () => {
     return function (dispatch) {
         axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
-            //console.log(response.data);
-            dispatch({ type: INIT_USER_ORDERS, payload: response.data  })
+            if (response.data.status) {
+                //console.log(response.data);
+                dispatch({ type: INIT_USER_ORDERS, payload: response.data })
+            }
         })
             .catch(function (error) {
                 console.log(error);
@@ -28,76 +30,76 @@ export const initializeUserOrdersAC = () => {
 }
 
 
-export const loginAC = (user,navigate)=>{
-  return function(dispatch){
-    axios.post('https://servermegamarket.onrender.com/login',{user}).then(function (response) {
-        if(response.data.status){
-          dispatch({type:INIT_USER, payload: response.data.user})
-          dispatch(initializeCartAC(response.data.user._id));
-          navigate('/');
-        };
-       
-      })
-      .catch(function (error) {
-        console.log(error.response.data);
-        alert('Incorrect Credentials');
-      })  
-}
+export const loginAC = (user, navigate) => {
+    return function (dispatch) {
+        axios.post('https://servermegamarket.onrender.com/login', { user }).then(function (response) {
+            if (response.data.status) {
+                dispatch({ type: INIT_USER, payload: response.data.user })
+                dispatch(initializeCartAC(response.data.user._id));
+                navigate('/');
+            };
+
+        })
+            .catch(function (error) {
+                console.log(error.response.data);
+                alert('Incorrect Credentials');
+            })
+    }
 }
 
-export const checkAuthAC = (navigate)=>{
-  return function(dispatch){
-    axios.get('https://servermegamarket.onrender.com/user').then(function (response) {
-      //console.log('auth',response.data);
-        if(response.data.status){
-          dispatch({type:INIT_USER, payload: response.data.user})
-          dispatch(initializeCartAC(response.data.user._id));
-          navigate('/');
-        } else {
-          navigate('/login');
-        }
-       
-      })
-      .catch(function (error) {
-        console.log(error.response.data);
-        navigate('/login');
-      })  
-}
-}
+export const checkAuthAC = (navigate) => {
+    return function (dispatch) {
+        axios.get('https://servermegamarket.onrender.com/user').then(function (response) {
+            //console.log('auth',response.data);
+            if (response.data.status) {
+                dispatch({ type: INIT_USER, payload: response.data.user })
+                dispatch(initializeCartAC(response.data.user._id));
+                navigate('/');
+            } else {
+                navigate('/login');
+            }
 
-export const signupAC = (user,navigate)=>{
-  return function(dispatch){
-    axios.post('https://servermegamarket.onrender.com/signup',{user}).then(function (response) {
-      if(response.data.status){
-        dispatch({type:INIT_USER, payload: response.data.user})
-        dispatch(initializeCartAC(response.data.user._id));
-        navigate('/');
-
-      };
-      })
-      .catch(function (error) {
-        console.log(error.response.data);
-        alert('Username already exist');
-
-      })  
-}
+        })
+            .catch(function (error) {
+                console.log(error.response.data);
+                navigate('/login');
+            })
+    }
 }
 
+export const signupAC = (user, navigate) => {
+    return function (dispatch) {
+        axios.post('https://servermegamarket.onrender.com/signup', { user }).then(function (response) {
+            if (response.data.status) {
+                dispatch({ type: INIT_USER, payload: response.data.user })
+                dispatch(initializeCartAC(response.data.user._id));
+                navigate('/');
 
-export const logoutAC = (navigate)=>{
-  return function(dispatch){
-    axios.get('https://servermegamarket.onrender.com/logout').then(function (response) {
-     //console.log('logoutAC');   
-    if(response.data.status){
-          dispatch({type:INIT_USER, payload: {}})
-          navigate('/login');
-        };
-       
-      })
-      .catch(function (error) {
-        console.log(error.response.data);
-      })  
+            };
+        })
+            .catch(function (error) {
+                console.log(error.response.data);
+                alert('Username already exist');
+
+            })
+    }
 }
+
+
+export const logoutAC = (navigate) => {
+    return function (dispatch) {
+        axios.get('https://servermegamarket.onrender.com/logout').then(function (response) {
+            //console.log('logoutAC');   
+            if (response.data.status) {
+                dispatch({ type: INIT_USER, payload: {} })
+                navigate('/login');
+            };
+
+        })
+            .catch(function (error) {
+                console.log(error.response.data);
+            })
+    }
 }
 
 export const initializeProductsAC = () => {  //AC = Action Creator
@@ -184,13 +186,13 @@ export const setShipAddressAC = (address) => {  //AC = Action Creator
     }
 }
 
-export const placeOrderAC = (order,navigate) => {  //AC = Action Creator
+export const placeOrderAC = (order, navigate) => {  //AC = Action Creator
     return function (dispatch) {
         axios.post('https://servermegamarket.onrender.com/order', { order: order }).then(function (response) {
             //console.log(response);
             dispatch({ type: PLACE_ORDER, payload: response.data })
-            navigate('/ordersuccess/'+response.data._id);
-          })
+            navigate('/ordersuccess/' + response.data._id);
+        })
             .catch(function (error) {
                 console.log(error);
             })

@@ -81,13 +81,18 @@ const User = new mongoose.model('User', userSchema);
 const Order = new mongoose.model('Order', orderSchema);
 
 
-app.get('/userorders',(req,res)=>{
-  let userId = req.session.user._id;
-  User.findOne({_id : userId}).populate('orders').then(result=>{
-        res.send(result);
+app.get('/userorders', (req, res) => {
+  if (req.session.user) {
+    User.findOne({ username: req.session.user.username }).populate('orders').then(result => {
+      res.send(result);
     }).catch((err) => console.log("userorders error", err))
-  
-  });
+
+
+  } else {
+    console.log("getuser", req.session)
+    res.send({ status: false });
+  }
+});
 
 
 app.post('/login', (req, res) => {
@@ -130,16 +135,16 @@ app.post('/signup', (req, res) => {
 
 })
 //session commented
-app.get('/user',(req,res)=>{
-if(req.session.user){
-    User.findOne({username: req.session.user.username}).populate('orders').then(result=>{
-          req.session.user = result;
-          res.send({status:true, user:result});
-  })
-} else {
-  console.log("getuser", req.session)
-  res.send({status:false});
-}
+app.get('/user', (req, res) => {
+  if (req.session.user) {
+    User.findOne({ username: req.session.user.username }).populate('orders').then(result => {
+      req.session.user = result;
+      res.send({ status: true, user: result });
+    })
+  } else {
+    console.log("getuser", req.session)
+    res.send({ status: false });
+  }
 });
 // you will need to call this for order updates. Not the best solution. you can make and Order GET API also.
 // app.get('/user', (req, res) => {

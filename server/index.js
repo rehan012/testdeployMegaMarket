@@ -15,7 +15,6 @@ app.use(cors({
 }))
 
 app.use(express.json())
-app.set('trust proxy', true)
 app.use(session({
   secret: 'keyboard cat',
   resave: false,

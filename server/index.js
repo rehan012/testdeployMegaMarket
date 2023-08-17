@@ -96,6 +96,7 @@ app.post('/login',(req,res)=>{
 })
 
 app.get('/logout',(req,res)=>{
+
  req.session.user = null;
  res.send({status: true})
 })
@@ -118,20 +119,26 @@ app.post('/signup',(req,res)=>{
 
 
 })
-
-app.get('/user',(req,res)=>{
-if(req.session.user){
-    User.findOne({username: req.session.user.username}).populate('orders').then(result=>{
-          req.session.user = result;
-          res.send({status:true, user:result});
-  })
-} else {
-  console.log("getuser", req.session)
-  res.send({status:false});
-}
-});
+//session commented
+// app.get('/user',(req,res)=>{
+// if(req.session.user){
+//     User.findOne({username: req.session.user.username}).populate('orders').then(result=>{
+//           req.session.user = result;
+//           res.send({status:true, user:result});
+//   })
+// } else {
+//   console.log("getuser", req.session)
+//   res.send({status:false});
+// }
+// });
 // you will need to call this for order updates. Not the best solution. you can make and Order GET API also.
-
+app.get('/user',(req,res)=>{
+    User.findOne({}).populate('orders').then(result=>{
+    // req.session.user = result;
+    res.send({status:true, user:result});
+    })
+  
+  });
 
 
 app.get('/product', (req, res) => {
@@ -144,9 +151,9 @@ app.get('/cart', (req, res) => {
   // let userId = req.session.user._id;
   let userId = "64db7d182c52632013fe54f7"
   res.send(userId);
-  console.log("userId", userId)
-  console.log("req.session",req.session)
-  console.log("req.session._id",req.session.user._id)
+  // console.log("userId", userId)
+  // console.log("req.session",req.session)
+  // console.log("req.session._id",req.session.user._id)
 
 
   Cart.findOne({ userId: userId }).then((result) => {
@@ -154,7 +161,7 @@ app.get('/cart', (req, res) => {
       res.send(result)
     }
     else {
-      res.send({ userId: req.session.user._id, items: [] })
+      res.send({ userId: "64db7d182c52632013fe54f7", items: [] })
     }
   })
 })
@@ -199,7 +206,7 @@ app.post('/cart', (req, res) => {
 app.post('/removeItem', (req, res) => {
 
   // const userId = req.session.user._id;
-  const userId = req.session.user._id;
+  const userId = "64db7d182c52632013fe54f7";
   const item = req.body.item;
   Cart.findOne({ userId: userId }).then(result => {
 
@@ -214,7 +221,7 @@ app.post('/removeItem', (req, res) => {
 
 app.post('/emptyCart', (req, res) => {
   // const userId = req.session.user._id;
-  const userId = req.session.user._id;
+  const userId = "64db7d182c52632013fe54f7";
   Cart.findOne({ userId: userId }).then(result => {
     result.items = [];
     result.save().then(cart => {
@@ -232,7 +239,7 @@ app.post('/emptyCart', (req, res) => {
 // });
 
 app.post('/updateUserAddress', (req, res) => {
-  const userId = req.session.user._id
+  const userId = "64db7d182c52632013fe54f7";
   const address = req.body.address;
   User.findOne({ _id: userId }).then((user) => {
     user.addresses.push(address);
@@ -245,7 +252,8 @@ app.post('/updateUserAddress', (req, res) => {
 })
 
 app.post('/order', (req, res) => {
-  const userId = req.session.user._id
+  const userId = "64db7d182c52632013fe54f7"
+  
   const order = req.body.order;
 
   let newOrder = new Order(order);

@@ -86,7 +86,7 @@ export const signupAC = (user, navigate) => {
             if (response.data.status) {
                 dispatch({ type: INIT_USER, payload: response.data.user })
                 dispatch(initializeCartAC(response.data.user._id));
-                // navigate('/');
+                navigate('/');
 
             };
         })

@@ -15,12 +15,26 @@ export const INIT_USER = 'INIT_USER';
 
 
 
+// export const initializeUserOrdersAC = () => {
+//     return function (dispatch) {
+//         axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
+//             if (response.data.status) {
+//                 //console.log(response.data);
+//                 dispatch({ type: INIT_USER, payload: response.data.res })
+//             }
+//         })
+//             .catch(function (error) {
+//                 console.log(error);
+//             })
+//     }
+// }
+
 export const initializeUserOrdersAC = () => {
     return function (dispatch) {
-        axios.get("https://servermegamarket.onrender.com/userorders").then(function (response) {
+        axios.get("https://servermegamarket.onrender.com/user").then(function (response) {
             if (response.data.status) {
                 //console.log(response.data);
-                dispatch({ type: INIT_USER, payload: response.data.res })
+                dispatch({ type: INIT_USER, payload: response.data.user})
             }
         })
             .catch(function (error) {
@@ -28,7 +42,6 @@ export const initializeUserOrdersAC = () => {
             })
     }
 }
-
 
 export const loginAC = (user, navigate) => {
     return function (dispatch) {

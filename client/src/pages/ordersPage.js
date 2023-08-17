@@ -15,7 +15,7 @@ const OrdersPage = () => {
 
   useEffect(() => {
     dispatch(initializeUserOrdersAC()); // Fetch user orders when the component mounts
-  }, []);
+  }, [dispatch]);
 
   
  

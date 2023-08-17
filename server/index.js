@@ -150,8 +150,7 @@ app.get('/product', (req, res) => {
 app.get('/cart', (req, res) => {
   // let userId = req.session.user._id;
   let userId = "64db7d182c52632013fe54f7"
-  res.send(userId);
-  // console.log("userId", userId)
+    // console.log("userId", userId)
   // console.log("req.session",req.session)
   // console.log("req.session._id",req.session.user._id)
 
